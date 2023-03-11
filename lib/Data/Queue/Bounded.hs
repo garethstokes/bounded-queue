@@ -122,15 +122,15 @@ average :: Integral a => BQueue a -> a
 average (BQueue q _ s) = floor $ foldl' (+) 0 q % fromIntegral s
 {-# INLINE average #-}
 
-sum :: Integral a => BQueue a -> a
+sum :: Num a => BQueue a -> a
 sum (BQueue q _ _) = foldl' (+) 0 q
 {-# INLINE sum #-}
 
-max :: Integral a => BQueue a -> a
+max :: (Num a, Ord a) => BQueue a -> a
 max (BQueue q _ _) = foldl' Prelude.max 0 q
 {-# INLINE max #-}
 
-min :: Integral a => BQueue a -> a
+min :: (Num a, Ord a) => BQueue a -> a
 min (BQueue q _ _) = foldl' Prelude.min 0 q
 {-# INLINE min #-}
 
