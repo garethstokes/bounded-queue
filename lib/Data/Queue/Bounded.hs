@@ -45,6 +45,7 @@ module Data.Queue.Bounded (
     Data.Queue.Bounded.sum,
     Data.Queue.Bounded.max,
     Data.Queue.Bounded.min,
+    Data.Queue.Bounded.full,
 ) where
 
 import Control.DeepSeq (NFData)
@@ -145,3 +146,6 @@ take n (BQueue q l s) = BQueue (Seq.take n q) l $ Prelude.min n s
 -- | \(\mathcal{O}(\log(\min(i,n-i)))\).
 drop :: Int -> BQueue a -> BQueue a
 drop n (BQueue q l s) = BQueue (Seq.drop n q) l $ Prelude.max 0 (s - n)
+
+full :: BQueue a -> Bool
+full (BQueue _ l s) = l == s
